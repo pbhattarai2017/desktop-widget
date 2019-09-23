@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	// Create an 800x600 window that will contain the browser instance
 	GtkWidget *main_window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	// GtkWidget *main_window = gtk_window_new(GTK_WINDOW_POPUP);
-	gtk_window_set_default_size(GTK_WINDOW(main_window), 300, 300);
+	gtk_window_set_default_size(GTK_WINDOW(main_window), 400, 300);
 	
 	// Create a browser instance
 	WebKitWebView *webView = WEBKIT_WEB_VIEW(webkit_web_view_new());
@@ -45,11 +45,13 @@ int main(int argc, char *argv[])
 	// Make sure that when the browser area becomes visible, it will get mouse
 	// and keyboard events
 	// gtk_widget_grab_focus(GTK_WIDGET(webView));
+	//HERE
 	gtk_window_set_decorated(GTK_WINDOW(main_window), FALSE);
 	gtk_window_set_resizable(GTK_WINDOW(main_window), FALSE);
 	// Make sure the main window and all its contents are visible
 
 	gtk_widget_show_all(main_window);
+	//HERE
 	gtk_window_set_type_hint(GTK_WINDOW(main_window), GDK_WINDOW_TYPE_HINT_DESKTOP);
 
 	// gtk_window_set_type_hint(GTK_WINDOW(main_window), GDK_WINDOW_TYPE_HINT_DOCK);
@@ -64,8 +66,11 @@ int main(int argc, char *argv[])
 	// gtk_window_set_position(GTK_WINDOW(main_window),(GTK_WIN_POS_CENTER));
 	// Run the main GTK+ event loop
 	gtk_window_set_keep_below(GTK_WINDOW(main_window), TRUE);
-	gtk_window_set_gravity(GTK_WINDOW(main_window),GDK_GRAVITY_EAST);
-	gtk_window_move(GTK_WINDOW(main_window), workarea.width/2,workarea.height/2);
+	//HERE
+	gtk_window_set_gravity(GTK_WINDOW(main_window),GDK_GRAVITY_NORTH);
+	//HERE
+	// gtk_window_move(GTK_WINDOW(main_window), workarea.width/2,workarea.height/2);
+	gtk_window_move(GTK_WINDOW(main_window), workarea.width/2-150,workarea.height/2-100);
 	// gtk_widget_unrealize(GTK_WIDGET(main_window));
 	gtk_main();
 
