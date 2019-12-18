@@ -1,11 +1,22 @@
+#include <unistd.h>
+#include <string.h>
 #include <gtk/gtk.h>
 #include <webkit2/webkit2.h>
 
 static void destroyWindowCb(GtkWidget *widget, GtkWidget *window);
 static gboolean closeWebViewCb(WebKitWebView *webView, GtkWidget *window);
 
+char abspath[200] = "file://";
+char path[150];
+
 int main(int argc, char *argv[])
 {
+	//get current working directory absolute path
+	if(getcwd(path,150) == NULL) exit(1);
+	strcat(path,"/index.html");	
+	strcat(abspath, path);
+	printf("%s\n",abspath);
+	
 	// Initialize GTK+
 	gtk_init(&argc, &argv);
 	GdkRectangle workarea = {0};
@@ -40,7 +51,7 @@ int main(int argc, char *argv[])
 	g_signal_connect(webView, "close", G_CALLBACK(closeWebViewCb), main_window);
 
 	// Load a web page into the browser instance
-	webkit_web_view_load_uri(webView, "file:///home/prakash/projects/widget/desktop-widget/index.html");
+	webkit_web_view_load_uri(webView, abspath);
 
 	// Make sure that when the browser area becomes visible, it will get mouse
 	// and keyboard events
